@@ -2,10 +2,8 @@ package sia.tacocloud.controller;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import sia.tacocloud.model.AppUser;
 import sia.tacocloud.model.TacoOrder;
-import sia.tacocloud.props.OrderProps;
+import sia.tacocloud.props.OrderControllerProps;
 import sia.tacocloud.service.OrderService;
 
 import java.util.List;
@@ -24,10 +22,10 @@ import java.util.List;
 @SessionAttributes("tacoOrder")
 public class OrderController {
 
-    private OrderProps props;
+    private OrderControllerProps props;
     private OrderService orderService;
 
-    public OrderController(OrderService orderService, OrderProps props) {
+    public OrderController(OrderService orderService, OrderControllerProps props) {
         this.orderService = orderService;
         this.props = props;
     }

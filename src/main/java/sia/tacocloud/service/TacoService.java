@@ -1,6 +1,8 @@
 package sia.tacocloud.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sia.tacocloud.model.Ingredient;
@@ -25,6 +27,10 @@ public class TacoService {
 
     public void saveTaco(Taco taco) {
         tacoRepository.save(taco);
+    }
+
+    public Page<Taco> lastAddedTacos(Pageable pageable) {
+        return tacoRepository.findAllByOrderByCreatedAtDesc(pageable);
     }
 
     public void initTacos() {
