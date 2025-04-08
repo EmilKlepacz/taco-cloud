@@ -14,6 +14,7 @@ import sia.tacocloud.repository.TacoRepository;
 import sia.tacocloud.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -31,8 +32,8 @@ public class OrderService {
         this.userRepository = userRepository;
     }
 
-    public void saveOrder(@Valid TacoOrder order) {
-        orderRepository.save(order);
+    public TacoOrder saveOrder(@Valid TacoOrder order) {
+        return orderRepository.save(order);
     }
 
     public List<TacoOrder> ordersForUser(@AuthenticationPrincipal AppUser user, Pageable pageable) {
@@ -42,6 +43,10 @@ public class OrderService {
     public TacoOrder updateOrder(Long orderId, @Valid TacoOrder order) {
         order.setId(orderId);
         return orderRepository.save(order);
+    }
+
+    public Optional<TacoOrder> getOrderById(Long orderId) {
+        return orderRepository.findById(orderId);
     }
 
     // pre-authorize for ADMIN only in case this some other
