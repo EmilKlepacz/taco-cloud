@@ -57,7 +57,10 @@ public class SecurityConfig {
                 .logout(logout -> logout.logoutSuccessUrl("/"))
 
                 // Make H2-Console non-secured; for debug purposes
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
+                .csrf(csrf -> csrf.ignoringRequestMatchers(
+                        "/h2-console/**",
+                        //fixme: this /api is open for request only for development!
+                        "/api/**")) // allow all /api for testing purposes only!!! -> to enable http requests
 
                 // Allow pages to be loaded in frames from the same origin; needed for H2-Console
                 .headers(headers -> headers

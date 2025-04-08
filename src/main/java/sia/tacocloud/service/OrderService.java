@@ -6,9 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.support.SessionStatus;
 import sia.tacocloud.model.AppUser;
 import sia.tacocloud.model.Taco;
 import sia.tacocloud.model.TacoOrder;
@@ -34,12 +31,17 @@ public class OrderService {
         this.userRepository = userRepository;
     }
 
-    public void processOrder(@Valid TacoOrder order) {
+    public void saveOrder(@Valid TacoOrder order) {
         orderRepository.save(order);
     }
 
     public List<TacoOrder> ordersForUser(@AuthenticationPrincipal AppUser user, Pageable pageable) {
         return orderRepository.findByUserOrderByPlacedAtDesc(user, pageable);
+    }
+
+    public TacoOrder updateOrder(Long orderId, @Valid TacoOrder order) {
+        order.setId(orderId);
+        return orderRepository.save(order);
     }
 
     // pre-authorize for ADMIN only in case this some other

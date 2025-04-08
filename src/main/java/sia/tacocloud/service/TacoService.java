@@ -70,4 +70,8 @@ public class TacoService {
             tacoRepository.save(taco);
         }
     }
+
+    public Taco createTaco(Taco taco) {
+        return tacoRepository.save(taco);
+    }
 }

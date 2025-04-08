@@ -1,4 +1,4 @@
-package sia.tacocloud.controller;
+package sia.tacocloud.controller.web;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -58,7 +58,7 @@ public class OrderController {
 //        log.info("Order submitted: {}", order);
         order.setUser(user);
 
-        orderService.processOrder(order);
+        orderService.saveOrder(order);
         sessionStatus.setComplete();
 
         return "redirect:/";

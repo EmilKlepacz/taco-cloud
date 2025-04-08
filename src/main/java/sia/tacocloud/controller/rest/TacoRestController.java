@@ -1,14 +1,10 @@
 package sia.tacocloud.controller.rest;
 
-import jakarta.servlet.ServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import sia.tacocloud.model.AppUser;
 import sia.tacocloud.model.Taco;
 import sia.tacocloud.service.TacoService;
 
@@ -20,10 +16,10 @@ import java.util.Optional;
 //accepts cross-origin requests from the front-end running at http://tacocloud:8080.
 //for test app requests...
 @CrossOrigin(origins = "http://tacocloud:8080")
-public class TacoController {
+public class TacoRestController {
     private final TacoService tacoService;
 
-    public TacoController(TacoService tacoService) {
+    public TacoRestController(TacoService tacoService) {
         this.tacoService = tacoService;
     }
 
@@ -42,5 +38,11 @@ public class TacoController {
             return new ResponseEntity<>(taco.get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping(consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Taco createTaco(@RequestBody Taco taco) {
+        return tacoService.createTaco(taco);
     }
 }
