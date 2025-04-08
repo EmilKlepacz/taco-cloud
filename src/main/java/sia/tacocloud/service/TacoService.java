@@ -12,6 +12,7 @@ import sia.tacocloud.repository.TacoRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TacoService {
@@ -31,6 +32,10 @@ public class TacoService {
 
     public Page<Taco> lastAddedTacos(Pageable pageable) {
         return tacoRepository.findAllByOrderByCreatedAtDesc(pageable);
+    }
+
+    public Optional<Taco> getTacoById(Long id) {
+        return tacoRepository.findById(id);
     }
 
     public void initTacos() {

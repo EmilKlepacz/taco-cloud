@@ -34,3 +34,7 @@ have for further development with some examples.
   ```bash
   curl "http://localhost:8080/api/tacos?recent&page=0&size=5" | jq
   ``` 
+  
+  ```bash
+  curl -s "http://localhost:8080/api/tacos/95" | jq 
+  ``` 
