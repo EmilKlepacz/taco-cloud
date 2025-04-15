@@ -68,4 +68,10 @@ public class OrderRestController {
         TacoOrder patchedOrder = orderService.saveOrder(tacoOrder);
         return new ResponseEntity<>(patchedOrder, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{orderId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteOrder(@PathVariable("orderId") Long orderId) {
+        orderService.deleteOrderById(orderId);
+    }
 }

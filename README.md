@@ -77,3 +77,7 @@ curl -X PUT http://localhost:8080/api/orders/1 \
     ]
   }'
 ```
+
+```bash
+curl -s -X DELETE http://localhost:8080/api/orders/1 
+```

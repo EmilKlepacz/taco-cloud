@@ -2,6 +2,7 @@ package sia.tacocloud.service;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -48,6 +49,15 @@ public class OrderService {
     public Optional<TacoOrder> getOrderById(Long orderId) {
         return orderRepository.findById(orderId);
     }
+
+    public void deleteOrderById(Long orderId) {
+        try {
+            orderRepository.deleteById(orderId);
+        } catch (EmptyResultDataAccessException e) {
+            //do nothing about it
+        }
+    }
+
 
     // pre-authorize for ADMIN only in case this some other
     // service / controller will call this method
