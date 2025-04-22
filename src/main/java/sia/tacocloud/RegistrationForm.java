@@ -29,7 +29,7 @@ public class RegistrationForm {
                 state,
                 zip,
                 phone,
-                Set.of(new Role("USER")));
+                Set.of(new Role(null, "USER")));
     }
 
 }
