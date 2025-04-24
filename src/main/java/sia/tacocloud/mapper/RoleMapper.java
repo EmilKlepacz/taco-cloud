@@ -9,11 +9,7 @@ import sia.tacocloud.model.Role;
 @Mapper(componentModel = "spring")
 public interface RoleMapper {
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "name", target = "name")
     RoleDTO toDto(Role role);
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "name", target = "name")
     Role toEntity(RoleDTO dto);
 }

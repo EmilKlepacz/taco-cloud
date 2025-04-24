@@ -21,6 +21,7 @@ public class RegistrationForm {
 
     public AppUser toUser(PasswordEncoder passwordEncoder) {
         return new AppUser(
+                null,
                 username,
                 passwordEncoder.encode(password),
                 fullname,
